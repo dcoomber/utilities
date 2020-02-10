@@ -8,9 +8,9 @@ Update DataInjector.java with your database connection parameters, table name, f
 ## Kubernetes deployment
 Externally configurable bash utility for deploying to Kubernetes.
 
-Default configuration is overrideable via namespace specific configuration files.
+Default configuration is overrideable via namespace-specific configuration files.
 
-As a final step of execution, the scirpt outputs all the helper commands that I have thus far needed whilst performing my testing.
+As a final step of execution, the script outputs all the helper commands that I have thus far needed whilst performing my testing.
 
 1. Deleting pods
 1. Checking status of pods
