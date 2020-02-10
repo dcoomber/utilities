@@ -1,7 +1,7 @@
 #!/bin/bash
 # A shell script to deploy the current git clone to K8s
 # Written by: David Coomber
-# Last updated on: 10 February
+# Last updated on: 10 February 2020
 # -------------------------------------------------------
 
 #  https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
