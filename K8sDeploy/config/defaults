@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# printf formatting
+ERROR='\033[1;31m'    # Brown/Orange
+WARNING='\033[1;33m'  # Yellow
+NC='\033[0m'          # No Color
+
+# K8s context
+CONTEXT=default_context
+
+# K8s namespace
+NAMESPACE=default_namespace
+
+# variables used in image path
+IMAGE_PATH_ROOT="eu.gcr.io/default-assets"
+
+# application name inherited from git repo
+APP=`basename $PWD`
+
+# unique team identifier will be appended to image name
+BRANCH=uat

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# K8s context (uncomment to override defaults)
+#CONTEXT=your_context
+
+# K8s namespace (uncomment to override defaults)
+#NAMESPACE=your_namespace
+
+# variables used in image path (uncomment to override defaults)
+#IMAGE_PATH_ROOT="eu.gcr.io/your-assets"
+
+# application name inherited from git repo (uncomment to override defaults)
+#APP=`basename $PWD`
+
+# unique team identifier will be appended to image name (uncomment to override defaults)
+#BRANCH=uat
