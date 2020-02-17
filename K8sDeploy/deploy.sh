@@ -1,7 +1,7 @@
 #!/bin/bash
 # A shell script to deploy the current git clone to K8s
 # Written by: David Coomber
-# Last updated on: 10 February 2020
+# Last updated on: 17 February 2020
 # -------------------------------------------------------
 
 #  https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
@@ -11,8 +11,8 @@ function usage {
     echo "A shell script to deploy the current git clone to K8s"
     echo
     echo "usage: $0 config_file [relativepath]"
-    echo "  config_file       file name of the relevant namespace config file in .config"
-    echo "  relativepath      optional sub-directory containing a valid Dockerfile"
+    echo "  config_file       file containing namespace-specific detail (within the deployment script config sub-directory)"
+    echo "  relativepath      optional github clone sub-directory containing the Dockerfile for deployment"
     echo
     exit 1
 }
@@ -25,7 +25,7 @@ if [ -z "$1" ]; then
 fi
 
 # import settings from configuration file
-config_dir=$(dirname "$0")/.config
+config_dir=$(dirname "$0")/config
 defaults="$config_dir/defaults"
 config="$config_dir/$1"
 
@@ -84,7 +84,7 @@ printf "${WARNING}Building image ($IMAGE_PATH)${NC}\n"
 echo "  docker build -t $IMAGE_PATH -f $dockerfile ."
 echo "    or"
 echo "  docker build -t $IMAGE_PATH -f $dockerfile --no-cache ."
-if ! docker build -t $IMAGE_PATH -f $dockerfile .; then
+if ! docker build -t $IMAGE_PATH -f $dockerfile --no-cache .; then
     echo
     printf "${ERROR}Building image failed.  See above for details.${NC}\n"
     echo
@@ -147,5 +147,9 @@ printf "  stern --context $CONTEXT --namespace $NAMESPACE -l app=$app --tail 100
 echo
 printf "${WARNING}To edit your namespace:${NC}\n"
 echo "  kubectl --context $CONTEXT edit ns $NAMESPACE"
+
+echo
+printf "${WARNING}To view pod details and events:${NC}\n"
+printf "  kubectl --context $CONTEXT describe pods -n $NAMESPACE ${WARNING}<<pod_name>>${NC}\n"
 
 popd > /dev/null
