@@ -1,1 +1,3 @@
 *.out
+exists.txt
+not-exists.txt
