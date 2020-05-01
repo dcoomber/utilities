@@ -19,3 +19,6 @@ As a final step of execution, the script outputs all the helper commands that I 
 1. Viewing / changing K8s deployment configuration
 1. Viewing application logs
 1. Editing the namespace configuration
+
+## Web crawl and search
+Command-line utility to traverse all links within a specific domain in order to search for specific text within the `html` of each page.
