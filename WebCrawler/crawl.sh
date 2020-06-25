@@ -26,31 +26,41 @@ function clean() {
 }
 
 function crawl() {
+    line=$1
+    search_scope=$2
+    internal_list=$3
+    external_list=$4
+
     echo Crawling $1 for $2 links
 
     # get URLs internal to the domain
-    if [ "$2" == "internal" ] || [ "$2" == "all" ]; then
-        curl -silent $1 | grep -o "href=\"\/[^(\ \>)]*" | sed 's|.*\="\(.*\)\"|\1|' | grep -v "^\/$" | sort | uniq > $3
+    if [ "$search_scope" == "internal" ] || [ "$search_scope" == "all" ]; then
+        curl -silent $line | grep -o "href=\"\/[^(\ \>)]*" | sed 's|.*\="\(.*\)\"|\1|' | grep -v "^\/$" | sort | uniq > $internal_list
     fi
 
     # get URLs external to the domain
-    if [ "$2" == "external" ] || [ "$2" == "all" ]; then
-        curl -silent $1 | grep -o "href=\"[http|https][^(\ \>)]*" | sed 's|.*\="\(.*\)\"|\1|' >$4
+    if [ "$search_scope" == "external" ] || [ "$search_scope" == "all" ]; then
+        curl -silent $line | grep -o "href=\"[http|https][^(\ \>)]*" | sed 's|.*\="\(.*\)\"|\1|' > $external_list
     fi
 }
 
 function search() {
+    line=$1
+    search_string=$2
+    report_on=$3
+    output=$4
+
     echo Searching $1
 
-    if [ "$3" == "exists" ]; then
-        if ! curl -silent $1 | grep -q $2; then
-            echo "     should contain the search string '$2'... but doesn't!"
-            echo $1 >> $4
+    if [ "$report_on" == "exists" ]; then
+        if ! curl -silent $line | grep -q $search_string; then
+            echo "     should contain the search string '$search_string'... but doesn't!"
+            echo $line >> $output
         fi
     else
-        if curl -silent $1 | grep -q $2; then
-            echo "     should not contain the search string '$2'... but does!"
-            echo $1 >> $4
+        if curl -silent $line | grep -q $search_string; then
+            echo "     should not contain the search string '$search_string'... but does!"
+            echo $line >> $output
         fi
     fi
 }
@@ -74,7 +84,6 @@ if [ -z "$3" ]; then
     usage
 fi
 
-
 if [ -z "$4" ]; then
     echo
     echo "Missing required argument 'report_on'."
@@ -82,10 +91,10 @@ if [ -z "$4" ]; then
 fi
 
 # a variable needs a name
-site=$1
-search_scope=$2
-search_string=$3
-report_on=$4
+site="$1"
+search_scope="$2"
+search_string="$3"
+report_on="$4"
 
 # file name variables
 internal_list=internal_list.out
