@@ -5,6 +5,13 @@ Java/Maven based utility to inject data into a database table.
 I used this to inject millions of records for volume testing (performance test with JMeter)
 Update DataInjector.java with your database connection parameters, table name, field list and then set the field values inside the loop.
 
+## Installers
+Collection of bash scripts to download and install some software on my Linux desktop.
+
+1. Postman
+1. Sweet Home 3D
+1. XMind - [this installer does the trick](https://github.com/mriza/XMind-Linux-Installer)
+
 ## Kubernetes deployment
 Externally configurable bash utility for deploying to Kubernetes.
 
