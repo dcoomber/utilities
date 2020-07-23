@@ -1,0 +1,8 @@
+# flat files
+*.csv
+
+# data files
+*.json
+
+# Log file
+*.xls*
