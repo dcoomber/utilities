@@ -7,6 +7,9 @@
 
 # built on top of https://gist.github.com/antoineMoPa/ada42dcfc96197e38dc8c4df363aed72 
 
+# TODO: Split crawl from search
+# TODO: Report on broken links in crawl
+
 function usage() {
     echo
     echo "A shell script to crawl a website and return a list of pages that do not contain the specified string"
@@ -53,15 +56,17 @@ function search() {
     echo Searching $1
 
     if [ "$report_on" == "exists" ]; then
-        if ! curl -silent $line | grep -q $search_string; then
+        if ! curl -silent $line | grep -q "$search_string"; then
             echo "     should contain the search string '$search_string'... but doesn't!"
             echo $line >> $output
         fi
-    else
-        if curl -silent $line | grep -q $search_string; then
+    elif [ "$report_on" == "not_exists" ]; then
+        if curl -silent $line | grep -q "$search_string"; then
             echo "     should not contain the search string '$search_string'... but does!"
             echo $line >> $output
         fi
+    else
+        echo "     '$report_on' is not a valid reporting option!"
     fi
 }
 
@@ -163,7 +168,7 @@ echo >> $output
 
 while read line
 do
-    search $line $search_string $report_on $output
+    search "$line" "$search_string" "$report_on" "$output"
 done < $url_list
 
 # clean up
