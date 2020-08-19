@@ -12,7 +12,7 @@ function usage() {
     echo "A shell script to crawl a website and return a list of pages that do not contain the specified string"
     echo
     echo "usage: $0 base_url search_scope search_string report_on"
-    echo "  base_url         the base protocal and domain (e.g. http://example.com"
+    echo "  base_url         the base protocal and domain (e.g. http://example.com)"
     echo "  search_scope     one of internal, external or all"
     echo "  search_string    the string that should exist on all pages"
     echo "  report_on        one of exists or not_exists"
