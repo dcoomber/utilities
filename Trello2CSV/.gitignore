@@ -1,5 +1,6 @@
 # flat files
 *.csv
+*.tab
 
 # data files
 *.json
