@@ -5,8 +5,8 @@ A shell script to download and convert a Trello board to CSV
 ## Arguments
 
 ```
-*config_file*       file containing Trello board specific detail
-*input_file*        [optional] Trello board json file
+config_file       file containing Trello board specific detail
+input_file        [optional] Trello board json file
 ```
 
 ## Configuration file
