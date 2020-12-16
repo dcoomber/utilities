@@ -1,0 +1,12 @@
+# flat files
+*.csv
+*.tab
+
+# data files
+*.json
+
+# config files
+config/*
+
+# Log file
+*.xls*

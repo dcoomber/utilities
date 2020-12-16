@@ -1,0 +1,9 @@
+#!/bin/bash
+
+API_KEY=YOUR_API_KEY
+TOKEN=YOUR_TOKEN
+BOARD_ID=YOUR_BOARD_ID
+
+export API_KEY
+export TOKEN
+export BOARD_ID
