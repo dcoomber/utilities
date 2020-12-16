@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# A shell script to extract Trello board list IDs
+# A shell script to extract Trello card list movement dates
+#   for Kanban stype reporting (lag, cycle, etc.)
 # Written by: David Coomber
 # Last updated on: 14 December 2020
 # -------------------------------------------------------
 
-# TODO: Add switch to filter out archived lists
-
 function usage {
-    printf "\nA shell script to extract Trello board list IDs\n\n"
-    printf "${WARNING}usage:${NC} %s config_file\n" "$0"
+    printf "\nA shell script to extract Trello card list movement dates\n\n"
+    printf "${WARNING}usage:${NC} %s config_file [input_file]\n" "$0"
     printf "  config_file       file containing Trello board specific detail\n"
+    printf "  input_file        [optional] Trello board json file\n\n"
     exit 1
 }
 
@@ -37,10 +37,27 @@ fi
 # shellcheck disable=SC1090
 source "${CONFIG}"
 
-# Download Trello lists
+# Shared Trello URL variables
 base_url="https://api.trello.com/1"
-boards_path="boards/${BOARD_ID}"
 auth="key=${API_KEY}&token=${TOKEN}"
-url="${base_url}/${boards_path}/lists?${auth}"
 
-curl --silent "${url}" | jq -r '(["id", "name", "closed"]) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' | sed 's/,/ ,/g' | sed 's/"//g' | column -t -s,
+# Retrieve list of DONE cards
+# TODO: Add filter to remove archived cards
+IFS=', ' read -r -a list_array <<< "${DONE}}"
+
+
+card_array=()
+
+for list in "${list_array[@]}"
+do
+    lists_path="lists/${list}"
+    url="${base_url}/${lists_path}/cards?${auth}"
+    
+    while IFS='' read -r item; do card_array+=("$item"); done < <(curl --silent "${url}" | jq -r .[].id)
+done
+
+# Compile card details
+for card in "${card_array[@]}"
+do
+    echo "${card}"
+done

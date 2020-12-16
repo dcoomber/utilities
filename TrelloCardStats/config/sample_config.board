@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# Authentication
 API_KEY=YOUR_API_KEY
 TOKEN=YOUR_TOKEN
-BOARD_ID=YOUR_BOARD_ID
-
 export API_KEY
 export TOKEN
+
+# Trello board details
+BOARD_ID=YOUR_BOARD_ID
 export BOARD_ID
+
+# Done column list
+DONE=YOUR_LIST_ID_1,YOUR_LIST_ID_2
+export DONE
