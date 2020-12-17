@@ -43,21 +43,23 @@ auth="key=${API_KEY}&token=${TOKEN}"
 
 # Retrieve list of DONE cards
 # TODO: Add filter to remove archived cards
-IFS=', ' read -r -a list_array <<< "${DONE}}"
+IFS=',' read -r -a list_array <<< "${DONE}"
 
-
-card_array=()
+card_id_array=()
 
 for list in "${list_array[@]}"
 do
-    lists_path="lists/${list}"
-    url="${base_url}/${lists_path}/cards?${auth}"
-    
-    while IFS='' read -r item; do card_array+=("$item"); done < <(curl --silent "${url}" | jq -r .[].id)
+    lists_path="lists/${list}/cards"
+    url="${base_url}/${lists_path}?${auth}"
+    while IFS='' read -r item; do card_id_array+=("$item"); done < <(curl --silent "${url}" | jq -r .[].id)
 done
 
 # Compile card details
-for card in "${card_array[@]}"
+for card in "${card_id_array[@]}"
 do
-    echo "${card}"
+    # echo "${card}"
+    card_actions_path="cards/${card}/actions"
+    filter="createCard"
+    url="${base_url}/${card_actions_path}?${auth}&filter=${filter}"
+    curl --silent "${url}" | jq .
 done
