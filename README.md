@@ -32,3 +32,5 @@ A shell script to download and convert a Trello board to CSV.
 
 ## Web crawl and search
 Command-line utility to traverse all links within a specific domain in order to search for specific text within the `html` of each page.
+
+More information [here](WebCrawler/README.md).
