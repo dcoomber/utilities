@@ -8,9 +8,7 @@ Update DataInjector.java with your database connection parameters, table name, f
 ## Installers
 Collection of bash scripts to download and install some software on my Linux desktop.
 
-1. Postman
-1. Sweet Home 3D
-1. XMind - [this installer does the trick](https://github.com/mriza/XMind-Linux-Installer)
+More information [here](Installers/README.md)
 
 ## Kubernetes deployment
 Externally configurable bash utility for deploying to Kubernetes.
