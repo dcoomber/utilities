@@ -69,7 +69,7 @@ touch "${LAUNCHER}" && chmod +x "${LAUNCHER}"
 {
     echo "[Desktop Entry]"
     echo "Version=1.0"
-    echo "Name=${APP_NAME} ${APP_VER}"
+    echo "Name=${APP_NAME}"
     echo "GenericName=Free mind mapping and knowledge management software"
     echo "Comment=Freeplane is a free and open source software application that supports thinking, sharing information and getting things done at work, in school and at home. The software can be used for mind mapping and analyzing the information contained in mind maps. Freeplane runs on any operating system that has a current version of Java installed. It can be run locally or portably from removable storage like a USB drive."
     echo "Exec=/opt/${APP_NAME}-${APP_VER}/${APP_NAME}.sh"
