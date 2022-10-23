@@ -15,7 +15,7 @@
         <springframework.version>2.0.6</springframework.version>
         <slf4j.version>1.7.28</slf4j.version>
         <postgresql.version>8.4-702.jdbc4</postgresql.version>
-        <snakeyaml.version>1.31</snakeyaml.version>
+        <snakeyaml.version>1.32</snakeyaml.version>
     </properties>
 
     <dependencies>
